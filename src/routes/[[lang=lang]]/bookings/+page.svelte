@@ -2,7 +2,7 @@
 	import { currentLang } from '#lib/i18n.ts';
 
 	// TODO: replace with the band's real e-mail address.
-	const email = 'info@example.com';
+	const email = 'dvanmil@gmail.com';
 
 	const lang = $derived(currentLang());
 	const t = $derived(
