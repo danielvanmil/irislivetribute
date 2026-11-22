@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+/* Iris theme: colours sampled from the Iris logo. Use as e.g. bg-iris-black, text-iris-red. */
+@theme {
+	--color-iris-black: #000000; /* page background */
+	--color-iris-surface: #121212; /* cards, header */
+	--color-iris-line: #262626; /* borders, dividers */
+	--color-iris-red: #d91a13; /* logo red: accents, buttons */
+	--color-iris-red-dark: #a8140f; /* hover state for red */
+	--color-iris-grey: #9a9896; /* secondary text */
+	--color-iris-white: #f5f5f4; /* headings, main text */
+}
+
+@layer base {
+	html {
+		color-scheme: dark;
+		@apply bg-iris-black text-iris-white antialiased;
+	}
+
+	::selection {
+		@apply bg-iris-red text-iris-white;
+	}
+}
