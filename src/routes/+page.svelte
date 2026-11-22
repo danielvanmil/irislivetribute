@@ -1,23 +1,26 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import Nav from '#lib/Nav.svelte';
-	import logo from '#lib/assets/iris-logo.jpg';
+	import logo from '#lib/assets/iris-logo-black.webp';
 </script>
 
 <svelte:head>
-	<title>Iris – A tribute to Live</title>
+	<title>Īris – A tribute to Līve</title>
 </svelte:head>
 
 <section>
 	<div class="mx-auto flex max-w-4xl flex-col items-center px-4 py-12 text-center sm:py-16">
-		<Nav />
-
-		<img src={logo} alt="Iris – A tribute to the band Live" width="1024" height="1024" />
+		<img
+			src={logo}
+			alt="Īris – A tribute to the band Līve"
+			width="1024"
+			height="1024"
+			class="h-auto w-full max-w-md"
+		/>
 
 		<h1 class="mt-10 text-5xl font-bold tracking-[0.25em] text-iris-red uppercase sm:text-6xl">
-			Iris
+			Īris
 		</h1>
-		<p class="mt-3 text-lg tracking-widest text-iris-grey uppercase">A tribute to the band Live</p>
+		<p class="mt-3 text-lg tracking-widest text-iris-grey uppercase">A tribute to the band Līve</p>
 
 		<a
 			href={resolve('/shows')}

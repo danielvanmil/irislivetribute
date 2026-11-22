@@ -1,25 +1,14 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-
 	// TODO: replace with the band's real e-mail address.
 	const email = 'info@example.com';
 </script>
 
 <svelte:head>
-	<title>Bookings – Iris</title>
+	<title>Bookings – Īris</title>
 </svelte:head>
 
 <div class="mx-auto max-w-3xl px-4 py-12 sm:py-16">
-	<a
-		href={resolve('/')}
-		class="text-sm font-semibold tracking-widest text-iris-grey uppercase transition hover:text-iris-white"
-	>
-		← Home
-	</a>
-
-	<h1 class="mt-8 text-4xl font-bold tracking-wide text-iris-white uppercase sm:text-5xl">
-		Bookings
-	</h1>
+	<h1 class="text-4xl font-bold tracking-wide text-iris-white uppercase sm:text-5xl">Bookings</h1>
 	<div class="mt-4 h-1 w-16 bg-iris-red"></div>
 
 	<p class="mt-8 text-lg text-iris-grey">
