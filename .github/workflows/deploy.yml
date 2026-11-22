@@ -29,10 +29,9 @@ jobs:
 
       - run: npm ci
 
+      # The site is served from the root of the custom domain https://irislivetribute.nl,
+      # so no BASE_PATH is needed. (Without a custom domain it would be /<repo-name>.)
       - name: Build
-        env:
-          # The site lives at https://<user>.github.io/<repo-name>/
-          BASE_PATH: /${{ github.event.repository.name }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
