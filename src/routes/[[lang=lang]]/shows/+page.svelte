@@ -1,6 +1,27 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { shows, type Show } from '#lib/shows.ts';
+	import { currentLang } from '#lib/i18n.ts';
+
+	const lang = $derived(currentLang());
+	const t = $derived(
+		{
+			nl: {
+				description: 'Komende en eerdere shows van Īris, de tributeband van Līve.',
+				upcoming: 'Komend',
+				past: 'Geweest',
+				empty: 'Nieuwe shows worden hier binnenkort aangekondigd.',
+				locale: 'nl-NL'
+			},
+			en: {
+				description: 'Upcoming and past shows of Īris, the tribute band to Līve.',
+				upcoming: 'Upcoming',
+				past: 'Past',
+				empty: 'New show dates will be announced here soon.',
+				locale: 'en-GB'
+			}
+		}[lang]
+	);
 
 	// The page is prebuilt, so start with the build date and switch to the visitor's
 	// date once it loads in the browser. That way a show moves to "Past" on time even
@@ -20,8 +41,8 @@
 	const parts = (show: Show) => {
 		const d = new Date(show.date + 'T12:00:00');
 		return {
-			day: d.toLocaleDateString('en-GB', { day: '2-digit' }),
-			month: d.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase(),
+			day: d.toLocaleDateString(t.locale, { day: '2-digit' }),
+			month: d.toLocaleDateString(t.locale, { month: 'short' }).replace('.', '').toUpperCase(),
 			year: d.getFullYear()
 		};
 	};
@@ -29,7 +50,7 @@
 
 <svelte:head>
 	<title>Shows – Īris</title>
-	<meta name="description" content="Upcoming and past shows of Īris, the tribute band to Līve." />
+	<meta name="description" content={t.description} />
 </svelte:head>
 
 {#snippet showList(list: Show[], muted: boolean)}
@@ -105,21 +126,21 @@
 	<div class="mt-4 h-1 w-16 bg-iris-red"></div>
 
 	<section class="mt-10">
-		<h2 class="text-xl font-bold tracking-wide text-iris-white uppercase">Upcoming</h2>
+		<h2 class="text-xl font-bold tracking-wide text-iris-white uppercase">{t.upcoming}</h2>
 		{#if upcoming.length}
 			{@render showList(upcoming, false)}
 		{:else}
 			<div
 				class="mt-4 rounded-xl border border-dashed border-iris-line bg-iris-surface p-8 text-center text-iris-grey"
 			>
-				New show dates will be announced here soon.
+				{t.empty}
 			</div>
 		{/if}
 	</section>
 
 	{#if past.length}
 		<section class="mt-12">
-			<h2 class="text-xl font-bold tracking-wide text-iris-white uppercase">Past</h2>
+			<h2 class="text-xl font-bold tracking-wide text-iris-white uppercase">{t.past}</h2>
 			{@render showList(past, true)}
 		</section>
 	{/if}

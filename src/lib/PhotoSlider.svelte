@@ -1,7 +1,21 @@
 <script lang="ts">
 	// Photo slider: swipe/scroll on touch, arrow buttons, keyboard arrows and a thumbnail strip.
 	// Built on CSS scroll-snap, so it stays smooth on phones without extra libraries.
-	let { photos, label, alt }: { photos: string[]; label: string; alt: string } = $props();
+	type Text = { browse: string; of: string; previous: string; next: string; show: string };
+	const english: Text = {
+		browse: 'use the arrow keys to browse',
+		of: 'of',
+		previous: 'Previous photo',
+		next: 'Next photo',
+		show: 'Show photo'
+	};
+
+	let {
+		photos,
+		label,
+		alt,
+		text = english
+	}: { photos: string[]; label: string; alt: string; text?: Text } = $props();
 
 	let track: HTMLDivElement;
 	let thumbs: HTMLDivElement;
@@ -47,7 +61,7 @@
 			onkeydown={onKey}
 			role="group"
 			tabindex="0"
-			aria-label="{label}: use the arrow keys to browse"
+			aria-label="{label}: {text.browse}"
 			class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] focus:outline-none focus-visible:ring-2 focus-visible:ring-iris-red [&::-webkit-scrollbar]:hidden"
 		>
 			{#each photos as photo, i (photo)}
@@ -55,11 +69,11 @@
 					class="aspect-[3/2] w-full shrink-0 snap-center"
 					role="group"
 					aria-roledescription="slide"
-					aria-label="{i + 1} of {photos.length}"
+					aria-label="{i + 1} {text.of} {photos.length}"
 				>
 					<img
 						src={photo}
-						alt="{alt} ({i + 1} of {photos.length})"
+						alt="{alt} ({i + 1} {text.of} {photos.length})"
 						loading={i === 0 ? 'eager' : 'lazy'}
 						decoding="async"
 						class="size-full object-contain"
@@ -68,7 +82,7 @@
 			{/each}
 		</div>
 
-		{#each [{ dir: -1, name: 'Previous photo', d: 'm15 18-6-6 6-6', side: 'left-3' }, { dir: 1, name: 'Next photo', d: 'm9 18 6-6-6-6', side: 'right-3' }] as button (button.dir)}
+		{#each [{ dir: -1, name: text.previous, d: 'm15 18-6-6 6-6', side: 'left-3' }, { dir: 1, name: text.next, d: 'm9 18 6-6-6-6', side: 'right-3' }] as button (button.dir)}
 			<button
 				type="button"
 				aria-label={button.name}
@@ -105,7 +119,7 @@
 		{#each photos as photo, i (photo)}
 			<button
 				type="button"
-				aria-label="Show photo {i + 1}"
+				aria-label="{text.show} {i + 1}"
 				aria-current={i === current ? 'true' : undefined}
 				onclick={() => go(i)}
 				class="size-16 shrink-0 overflow-hidden rounded-lg border-2 transition sm:size-20 {i ===
