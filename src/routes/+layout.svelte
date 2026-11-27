@@ -18,7 +18,7 @@
 	});
 
 	// Tell search engines about the other language version of each page.
-	const site = 'https://irislivetribute.nl';
+	const site = 'https://www.irislivetribute.nl';
 	const alternates = $derived(
 		isPagePath(here)
 			? [
